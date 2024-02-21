@@ -1,17 +1,12 @@
 <br />
 <br />
 
-<p align="center">
-<img src="docs/images/logo.svg" width="240">
-</p>
-
 <br />
 <br />
-
 
 ## Reference implementation of hkt Protocol
 
-![Buildkite](https://img.shields.io/buildkite/0eae07525f8e44a19b48fa937813e2c21ee04aa351361cd851) 
+![Buildkite](https://img.shields.io/buildkite/0eae07525f8e44a19b48fa937813e2c21ee04aa351361cd851)
 ![Stable Status][stable-release]
 ![Prerelease Status][prerelease]
 [![codecov][codecov-badge]][codecov-url]
@@ -33,19 +28,20 @@
 
 hkt's purpose is to enable community-driven innovation to benefit people around the world.
 
-To achieve this purpose, *hkt* provides a developer platform where developers and entrepreneurs can create apps that put users back in control of their data and assets, which is the foundation of ["Open Web" movement][open-web-url].
+To achieve this purpose, _hkt_ provides a developer platform where developers and entrepreneurs can create apps that put users back in control of their data and assets, which is the foundation of ["Open Web" movement][open-web-url].
 
-One of the components of *hkt* is the hkt Protocol, an infrastructure for server-less applications and smart contracts powered by a blockchain.
+One of the components of _hkt_ is the hkt Protocol, an infrastructure for server-less applications and smart contracts powered by a blockchain.
 hkt Protocol is built to deliver usability and scalability of modern PaaS like Firebase at fraction of the prices that blockchains like Ethereum charge.
 
-Overall, *hkt* provides a wide range of tools for developers to easily build applications:
- - [JS Client library][js-api] to connect to hkt Protocol from your applications.
- - [Rust][rust-sdk] and [AssemblyScript][as-sdk] SDKs to write smart contracts and stateful server-less functions.
- - [Numerous examples][examples-url] with links to hack on them right inside your browser.
- - [Lots of documentation][docs-url], with [Tutorials][tutorials-url] and [API docs][api-docs-url].
+Overall, _hkt_ provides a wide range of tools for developers to easily build applications:
 
-[open-web-url]: https://techcrunch.com/2016/04/10/1301496/ 
-[js-api]: https://github.com/hkt/hkt-api-js 
+- [JS Client library][js-api] to connect to hkt Protocol from your applications.
+- [Rust][rust-sdk] and [AssemblyScript][as-sdk] SDKs to write smart contracts and stateful server-less functions.
+- [Numerous examples][examples-url] with links to hack on them right inside your browser.
+- [Lots of documentation][docs-url], with [Tutorials][tutorials-url] and [API docs][api-docs-url].
+
+[open-web-url]: https://techcrunch.com/2016/04/10/1301496/
+[js-api]: https://github.com/hkt/hkt-api-js
 [rust-sdk]: https://github.com/hkt/hkt-sdk-rs
 [as-sdk]: https://github.com/hkt/hkt-sdk-as
 [examples-url]: https://hkt.dev
@@ -62,9 +58,10 @@ pip3 install --user hktup
 ```
 
 You can join all the active networks:
-* mainnet: `hktup run mainnet`
-* testnet: `hktup run testnet`
-* betanet: `hktup run betanet`
+
+- mainnet: `hktup run mainnet`
+- testnet: `hktup run testnet`
+- betanet: `hktup run betanet`
 
 Check the `hktup` repository for [more details](https://github.com/hkt/hktup) how to run with or without docker.
 
