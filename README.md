@@ -51,7 +51,6 @@ You can join all the active networks:
 
 Check the `hktup` repository for [more details](https://github.com/hkt/hktup) how to run with or without docker.
 
-To learn how to become validator, checkout [documentation](https://docs.hkt.org/docs/develop/node/validator/staking-and-delegation).
 
 ## Contributing
 
