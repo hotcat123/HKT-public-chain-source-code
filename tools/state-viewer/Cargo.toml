@@ -1,0 +1,51 @@
+[package]
+name = "state-viewer"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+ansi_term = "0.12"
+anyhow = "1"
+borsh = "0.9"
+clap = { version = "3.1.6", features = ["derive"] }
+once_cell = "1.5.2"
+rand = "0.7"
+rayon = "1.5"
+serde = "1"
+serde_json = "1"
+tempfile = "3"
+tracing = "0.1.13"
+redis = "0.21.5"
+
+hkt-chain = { path = "../../chain/chain" }
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-crypto = { path = "../../core/crypto" }
+hkt-epoch-manager = { path = "../../chain/epoch-manager" }
+hkt-network = { path = "../../chain/network" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-primitives-core = { path = "../../core/primitives-core" }
+hkt-store = { path = "../../core/store" }
+hkt-test-contracts = { path = "../../runtime/hkt-test-contracts" }
+hktcore = { path = "../../hktcore" }
+node-runtime = { path = "../../runtime/runtime" }
+
+
+[dev-dependencies]
+hkt-client = { path = "../../chain/client" }
+testlib = { path = "../../test-utils/testlib" }
+
+[features]
+sandbox = [
+  "node-runtime/sandbox",
+  "hkt-chain/sandbox",
+  "hkt-client/sandbox",
+]
+nightly = [
+    "nightly_protocol",
+    "hktcore/nightly"
+]
+nightly_protocol = ["hktcore/nightly_protocol"]

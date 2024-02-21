@@ -1,0 +1,75 @@
+[package]
+name = "hkt-client"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+ansi_term = "0.12"
+actix = "0.13.0"
+actix-rt = "2"
+futures = "0.3"
+chrono = { version = "0.4.4", features = ["serde"] }
+tracing = "0.1.13"
+itertools = "0.10.0"
+rand = "0.7"
+serde_json = "1"
+sysinfo = "0.24.5"
+strum = { version = "0.24", features = ["derive"] }
+lru = "0.7.2"
+once_cell = "1.5.2"
+borsh = "0.9"
+reed-solomon-erasure = "4"
+num-rational = "0.3"
+thiserror = "1.0"
+tokio = { version = "1.1", features = ["sync"] }
+
+hkt-chain-primitives = { path = "../chain-primitives" }
+hkt-crypto = { path = "../../core/crypto" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-store = { path = "../../core/store" }
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-chain = { path = "../chain" }
+hkt-client-primitives = { path = "../client-primitives" }
+hkt-network = { path = "../network" }
+hkt-pool = { path = "../pool" }
+hkt-chunks = { path = "../chunks" }
+hkt-telemetry = { path = "../telemetry" }
+hkt-o11y = { path = "../../core/o11y" }
+hkt-performance-metrics = { path = "../../utils/hkt-performance-metrics" }
+hkt-performance-metrics-macros = { path = "../../utils/hkt-performance-metrics-macros" }
+delay-detector = { path = "../../tools/delay-detector" }
+hkt-network-primitives = { path = "../network-primitives" }
+
+[dev-dependencies]
+assert_matches = "1.3"
+hkt-actix-test-utils = { path = "../../test-utils/actix-test-utils" }
+
+[features]
+# if enabled, we assert in most situations that are impossible unless some byzantine behavior is observed.
+byzantine_asserts = ["hkt-chain/byzantine_asserts"]
+expensive_tests = []
+test_features = [
+  "hkt-network/test_features",
+  "hkt-chain/test_features",
+  "hkt-chunks/test_features",
+]
+delay_detector = [
+  "hkt-chain/delay_detector",
+  "hkt-network/delay_detector",
+  "delay-detector/delay_detector",
+]
+nightly_protocol = []
+nightly = [
+  "nightly_protocol",
+  "hkt-chain/nightly",
+]
+sandbox = [
+  "hkt-client-primitives/sandbox",
+  "hkt-chain/sandbox",
+]
+# Shardnet is the experimental network that we deploy for chunk-only producer testing.
+shardnet = ["hkt-network/shardnet"]

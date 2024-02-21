@@ -1,0 +1,25 @@
+[package]
+name = "genesis-csv-to-json"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+chrono = "0.4.7"
+csv = "1.1.1"
+serde = { version = "1", features = ["derive"] }
+clap = { version = "3.1.6", features = ["derive"] }
+
+hktcore = { path = "../../hktcore" }
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-crypto = { path = "../../core/crypto" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-network-primitives = { path = "../../chain/network-primitives" }
+
+[dev-dependencies]
+tempfile = "3"
+serde_json = "^1.0.41"
+serde = "^1.0.102"

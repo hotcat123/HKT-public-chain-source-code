@@ -1,0 +1,15 @@
+[package]
+name = "hkt-performance-metrics-macros"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+edition = "2021"
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+publish = false
+
+[dependencies]
+quote = "1.0"
+syn = { version = "1.0.54", features = ["full"] }
+
+[lib]
+proc-macro = true

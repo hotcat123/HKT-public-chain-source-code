@@ -1,0 +1,34 @@
+[package]
+name = "chainsync-loadtest"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+default-run = "chainsync-loadtest"
+
+[[bin]]
+path = "src/main.rs"
+name = "chainsync-loadtest"
+
+[dependencies]
+actix = "0.13.0"
+anyhow = "1.0.55"
+clap = { version = "3.1.6", features = ["derive"] }
+dirs = "3"
+futures = "0.3"
+log = "0.4"
+openssl-probe = "0.1.4"
+parking_lot = "0.12.1"
+rand = "0.8"
+tokio = { version = "1.16.1", features = ["rt-multi-thread", "sync"]}
+
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-crypto = { path = "../../core/crypto" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-store = { path = "../../core/store" }
+hktcore = { path = "../../hktcore" }
+hkt-network = { path = "../../chain/network" }
+hkt-network-primitives = { path = "../../chain/network-primitives" }
+hkt-o11y = { path = "../../core/o11y" }

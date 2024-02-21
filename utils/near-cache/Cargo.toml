@@ -1,0 +1,19 @@
+[package]
+name = "hkt-cache"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+edition = "2021"
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+publish = false
+
+[dependencies]
+lru = "0.7.2"
+
+[dev-dependencies]
+bencher = "0.1.5"
+rand = "0.7"
+
+[[bench]]
+name = "cache"
+harness = false

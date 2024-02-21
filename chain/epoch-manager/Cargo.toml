@@ -1,0 +1,40 @@
+[package]
+name = "hkt-epoch-manager"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+
+[dependencies]
+# Changing this version will lead to change to the protocol, as will change how validators get shuffled.
+protocol_defining_rand = { package = "rand", version = "0.6.5", default-features = false }
+tracing = "0.1.13"
+borsh = "0.9"
+rand = "0.7"
+serde_json = "1"
+smart-default = "0.6"
+primitive-types = { version = "0.10", default-features = false }
+num-rational = "0.3"
+chrono = { version = "0.4.4", optional = true}
+
+hkt-crypto = { path = "../../core/crypto" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-store = { path = "../../core/store" }
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-chain-primitives = { path = "../chain-primitives" }
+hkt-cache = { path = "../../utils/hkt-cache" }
+
+[features]
+expensive_tests = []
+protocol_feature_fix_staking_threshold = ["hkt-primitives/protocol_feature_fix_staking_threshold"]
+nightly = [
+  "nightly_protocol",
+  "hkt-primitives/nightly",
+  "protocol_feature_fix_staking_threshold",
+]
+mock_node = []
+nightly_protocol = ["hkt-primitives/nightly_protocol"]
+no_cache = []

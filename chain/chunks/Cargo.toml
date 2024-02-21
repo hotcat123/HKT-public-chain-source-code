@@ -1,0 +1,38 @@
+[package]
+name = "hkt-chunks"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+actix = "0.13.0"
+futures = "0.3"
+rand = "0.7"
+chrono = "0.4.6"
+tracing = "0.1.13"
+borsh = "0.9"
+lru = "0.7.2"
+reed-solomon-erasure = "4"
+once_cell = "1.5.2"
+
+hkt-crypto = { path = "../../core/crypto" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-chunks-primitives = { path = "../chunks-primitives" }
+hkt-store = { path = "../../core/store" }
+hkt-network = { path = "../network" }
+hkt-o11y = { path = "../../core/o11y" }
+hkt-chain = { path = "../chain" }
+hkt-pool = { path = "../pool" }
+hkt-network-primitives = { path = "../network-primitives" }
+
+[dev-dependencies]
+assert_matches = "1.5.0"
+
+[features]
+nightly = []
+byzantine_asserts = ["hkt-chain/byzantine_asserts"]
+expensive_tests = []
+test_features = []

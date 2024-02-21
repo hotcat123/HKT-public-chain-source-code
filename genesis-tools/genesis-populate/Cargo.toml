@@ -1,0 +1,22 @@
+[package]
+name = "genesis-populate"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+borsh = "0.9"
+indicatif = "0.15.0"
+clap = { version = "3.1.6", features = ["derive"] }
+tempfile = "3"
+
+hktcore = { path = "../../hktcore" }
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-crypto = { path = "../../core/crypto" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-store = { path = "../../core/store" }
+hkt-chain = { path = "../../chain/chain" }
+hkt-test-contracts = { path = "../../runtime/hkt-test-contracts" }

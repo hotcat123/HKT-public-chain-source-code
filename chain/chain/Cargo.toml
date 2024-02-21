@@ -1,0 +1,64 @@
+[package]
+name = "hkt-chain"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.60.0"
+edition = "2021"
+
+[dependencies]
+ansi_term = "0.12"
+actix = "0.13.0"
+borsh = "0.9"
+chrono = { version = "0.4.4", features = ["serde"] }
+enum-map = "2.1.0"
+itertools = "0.10.0"
+lru = "0.7.2"
+num-rational = "0.3"
+once_cell = "1.5.2"
+rand = "0.7"
+rayon = "1.5"
+strum = "0.24"
+thiserror = "1.0"
+tracing = "0.1.13"
+crossbeam-channel = "0.5"
+
+delay-detector = { path = "../../tools/delay-detector"}
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-chain-primitives = { path = "../chain-primitives" }
+hkt-crypto = { path = "../../core/crypto" }
+hkt-o11y = { path = "../../core/o11y" }
+hkt-pool = { path = "../pool" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-store = { path = "../../core/store" }
+hkt-cache = { path = "../../utils/hkt-cache" }
+hkt-client-primitives = { path = "../client-primitives"}
+hkt-epoch-manager = { path = "../epoch-manager" }
+
+[dev-dependencies]
+insta = "1"
+assert_matches = "1.5.0"
+
+[features]
+# if enabled, we assert in most situations that are impossible unless some byzantine behavior is observed.
+byzantine_asserts = []
+expensive_tests = []
+test_features = []
+delay_detector = ["delay-detector/delay_detector"]
+no_cache = ["hkt-store/no_cache"]
+protocol_feature_flat_state = ["hkt-store/protocol_feature_flat_state"]
+protocol_feature_reject_blocks_with_outdated_protocol_version = ["hkt-primitives/protocol_feature_reject_blocks_with_outdated_protocol_version"]
+
+shardnet = ["protocol_feature_reject_blocks_with_outdated_protocol_version"]
+
+nightly = [
+  "nightly_protocol",
+]
+nightly_protocol = [
+  "hkt-store/nightly_protocol",
+  "hkt-primitives/nightly_protocol",
+  "protocol_feature_reject_blocks_with_outdated_protocol_version"
+]
+mock_node = []
+sandbox = ["hkt-primitives/sandbox"]

@@ -1,0 +1,40 @@
+use hkt_chain::ChainStore;
+use hkt_chain::ChainStoreAccess;
+use hkt_primitives::account::id::AccountId;
+use hkt_primitives::block::Block;
+use hkt_primitives::transaction::SignedTransaction;
+
+/// Returns a list of transactions found in the block.
+pub fn dump_tx_from_block(
+    chain_store: &ChainStore,
+    block: &Block,
+    select_account_ids: Option<&[AccountId]>,
+) -> Vec<SignedTransaction> {
+    let chunks = block.chunks();
+    let mut res = vec![];
+    for (_, chunk_header) in chunks.iter().enumerate() {
+        res.extend(
+            chain_store
+                .get_chunk(&chunk_header.chunk_hash())
+                .unwrap()
+                .transactions()
+                .into_iter()
+                .filter(|signed_transaction| {
+                    should_include_signed_transaction(signed_transaction, select_account_ids)
+                })
+                .map(|signed_transaction| signed_transaction.clone())
+                .collect::<Vec<_>>(),
+        );
+    }
+    return res;
+}
+
+fn should_include_signed_transaction(
+    signed_transaction: &SignedTransaction,
+    select_account_ids: Option<&[AccountId]>,
+) -> bool {
+    match select_account_ids {
+        None => true,
+        Some(specified_ids) => specified_ids.contains(&signed_transaction.transaction.receiver_id),
+    }
+}

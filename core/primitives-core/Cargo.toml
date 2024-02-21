@@ -1,0 +1,39 @@
+[package]
+name = "hkt-primitives-core"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = true
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/hkt/hktcore"
+description = """
+This crate provides the core set of primitives used by other hktcore crates including hkt-primitives
+"""
+
+[dependencies]
+base64 = "0.13"
+borsh = "0.9"
+bs58 = "0.4"
+derive_more = "0.99.3"
+num-rational = { version = "0.3.1", features = ["serde"]}
+serde = { version = "1", features = ["derive"] }
+serde_repr = { version = "0.1.8" }
+strum = { version = "0.24", features = ["derive"] }
+sha2 = "0.10"
+deepsize = { version = "0.2.0", optional = true }
+
+hkt-account-id = { path = "../account-id" }
+
+[dev-dependencies]
+serde_json = "1"
+
+[features]
+default = []
+protocol_feature_ed25519_verify = []
+
+deepsize_feature = [
+  "deepsize",
+  "hkt-account-id/deepsize_feature",
+]

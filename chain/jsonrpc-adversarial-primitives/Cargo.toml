@@ -1,0 +1,19 @@
+[package]
+name = "hkt-jsonrpc-adversarial-primitives"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "1", features = ["derive"] }
+hkt-primitives = { path = "../../core/primitives" }
+
+hkt-network-primitives = { path = "../network-primitives" }
+deepsize = { version = "0.2.0", optional = true }
+
+[features]
+test_features = ["hkt-network-primitives/test_features"]
+deepsize_feature = ["deepsize", "hkt-primitives/deepsize_feature"]

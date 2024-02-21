@@ -1,0 +1,23 @@
+[package]
+name = "restaked"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+clap = { version = "3.1.6", features = ["derive"] }
+tokio = { version = "1.16.1", features = ["rt-multi-thread"]}
+
+hkt-crypto = { path = "../../core/crypto" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-jsonrpc-client = { path = "../../chain/jsonrpc/client" }
+hktcore = { path = "../../hktcore" }
+hkt-o11y = { path = "../../core/o11y" }
+
+integration-tests = { path = "../../integration-tests" }
+
+[features]
+test_features = ["integration-tests/test_features"]

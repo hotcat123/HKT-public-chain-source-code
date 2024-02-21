@@ -1,0 +1,83 @@
+[package]
+name = "runtime-params-estimator"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[[bin]]
+name = "runtime-params-estimator"
+required-features = ["costs_counting"]
+
+[dependencies]
+indicatif = "0.15.0"
+tempfile = "3"
+rand = "0.7.3"
+rand_xorshift = "0.2"
+serde_json = "1"
+clap = { version = "3.1.6", features = ["derive"] }
+borsh = "0.9"
+num-rational = "0.3"
+anyhow = "1"
+chrono = "0.4"
+bytesize = "1.1"
+tracing = "0.1"
+tracing-span-tree = "0.1"
+tracing-subscriber = { version = "0.3.11", features = ["fmt", "registry"] }
+
+genesis-populate = { path = "../../genesis-tools/genesis-populate"}
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-crypto = { path = "../../core/crypto" }
+hkt-vm-logic = {path = "../../runtime/hkt-vm-logic"  }
+hkt-vm-runner = {path = "../../runtime/hkt-vm-runner" }
+node-runtime = { path = "../../runtime/runtime" }
+hkt-store = { path = "../../core/store" }
+hkt-test-contracts = { path = "../hkt-test-contracts" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-o11y = { path = "../../core/o11y" }
+
+hktcore = { path = "../../hktcore" }
+rocksdb = { version = "0.18.0", default-features = false, features = [
+  "snappy",
+  "lz4",
+  "zstd",
+  "zlib",
+  "jemalloc",
+] }
+walrus = "0.18.0"
+hex = "0.4"
+cfg-if = "1"
+num-traits = "0.2.12"
+libc = "0.2.81"
+wat = "1.0"
+
+[features]
+default = ["costs_counting"]
+costs_counting = ["hkt-vm-logic/costs_counting"]
+# Required feature for proper config, but can't be enabled by default because it is leaked to other release crates.
+required = [
+  "costs_counting",
+  "hkt-vm-runner/no_cpu_compatibility_checks",
+  "no_cache",
+]
+no_cache = [
+  "node-runtime/no_cache",
+  "hkt-store/no_cache",
+]
+wasmtime = ["hkt-vm-runner/force_wasmtime"]
+nightly = [
+    "nightly_protocol",
+]
+nightly_protocol = [
+  "hkt-primitives/nightly_protocol",
+  "hkt-test-contracts/nightly",
+  "protocol_feature_ed25519_verify"
+]
+sandbox = ["node-runtime/sandbox"]
+io_trace = ["hkt-store/io_trace", "hkt-o11y/io_trace", "hkt-vm-logic/io_trace"]
+protocol_feature_ed25519_verify = [
+    "hkt-vm-logic/protocol_feature_ed25519_verify",
+    "hkt-vm-runner/protocol_feature_ed25519_verify"
+]

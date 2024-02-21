@@ -1,0 +1,3 @@
+*.wasm
+!test_contract_ts.wasm
+!hkt_evm.wasm

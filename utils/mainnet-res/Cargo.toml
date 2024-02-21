@@ -1,0 +1,17 @@
+[package]
+name = "hkt-mainnet-res"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+edition = "2021"
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde_json = "1"
+
+hkt-account-id = { path = "../../core/account-id" }
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-primitives = { path = "../../core/primitives" }

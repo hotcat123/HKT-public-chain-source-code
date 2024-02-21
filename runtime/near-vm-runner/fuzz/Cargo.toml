@@ -1,0 +1,35 @@
+[package]
+name = "hkt-vm-runner-fuzz"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+arbitrary = { version = "1", features = ["derive"] }
+libfuzzer-sys = "0.4"
+wasm-smith = "0.10.0"
+wasmprinter = "0.2"
+
+hkt-primitives = { path = "../../../core/primitives" }
+hkt-test-contracts = { path = "../../hkt-test-contracts" }
+hkt-vm-errors = { path = "../../hkt-vm-errors" }
+hkt-vm-logic = { path = "../../hkt-vm-logic", default-features = false, features = [] }
+hkt-vm-runner = { path = ".." }
+
+[[bin]]
+name = "runner"
+path = "fuzz_targets/runner.rs"
+test = false
+doc = false
+
+[[bin]]
+name = "diffrunner"
+path = "fuzz_targets/diffrunner.rs"
+test = false
+doc = false

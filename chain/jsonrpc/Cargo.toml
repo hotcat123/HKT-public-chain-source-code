@@ -1,0 +1,47 @@
+[package]
+name = "hkt-jsonrpc"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+actix = "0.13.0"
+actix-web = "4.0.1"
+actix-cors = "0.6.1"
+easy-ext = "0.2"
+tokio = { version = "1.1", features = ["net", "rt-multi-thread"] }
+futures = "0.3"
+once_cell = "1.5.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tracing = { version = "0.1.13", features = ["std"] }
+tracing-subscriber = { version = "0.3.9", features = ["fmt", "env-filter", "std"] }
+
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-client-primitives = { path = "../client-primitives" }
+hkt-primitives = { path = "../../core/primitives" }
+hkt-client = { path = "../client" }
+hkt-network = { path = "../network" }
+hkt-o11y = { path = "../../core/o11y" }
+hkt-jsonrpc-client = { path = "client" }
+hkt-jsonrpc-primitives = { path = "../jsonrpc-primitives", features = ["full"] }
+hkt-jsonrpc-adversarial-primitives = { path = "../jsonrpc-adversarial-primitives", optional = true }
+hkt-rpc-error-macro = { path = "../../tools/rpctypegen/macro" }
+hkt-network-primitives = { path = "../network-primitives" }
+
+[features]
+dump_errors_schema = ["hkt-rpc-error-macro/dump_errors_schema"]
+test_features = [
+  "hkt-client/test_features",
+  "hkt-network/test_features",
+  "hkt-jsonrpc-primitives/test_features",
+  "hkt-jsonrpc-adversarial-primitives/test_features",
+]
+nightly = ["nightly_protocol"]
+nightly_protocol = ["hkt-primitives/nightly_protocol"]
+sandbox = [
+  "hkt-client/sandbox",
+]

@@ -1,0 +1,37 @@
+[package]
+name = "hkt-jsonrpc-tests"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+actix = "0.13.0"
+awc = "3.0.0"
+once_cell = "1.5.2"
+futures = "0.3"
+borsh = "0.9"
+serde = "1"
+serde_json = "1"
+
+hkt-chain-configs = { path = "../../../core/chain-configs" }
+hkt-crypto = { path = "../../../core/crypto" }
+hkt-primitives = { path = "../../../core/primitives" }
+hkt-client = { path = "../../client" }
+hkt-store = { path = "../../../core/store" }
+hkt-o11y = { path = "../../../core/o11y" }
+hkt-network = { path = "../../network" }
+hkt-network-primitives = { path = "../../network-primitives" }
+hkt-jsonrpc = { path = "../" }
+hkt-jsonrpc-primitives = { path = "../../jsonrpc-primitives" }
+
+[dev-dependencies]
+hkt-actix-test-utils = { path = "../../../test-utils/actix-test-utils" }
+
+[features]
+test_features = ["hkt-jsonrpc/test_features"]
+nightly = ["nightly_protocol"]
+nightly_protocol = ["hkt-jsonrpc/nightly_protocol"]
+sandbox = ["hkt-jsonrpc/sandbox"]

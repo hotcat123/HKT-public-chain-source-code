@@ -1,0 +1,84 @@
+[package]
+name = "hktd"
+version = "1.30.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+default-run = "hktd"
+
+[[bin]]
+path = "src/main.rs"
+name = "hktd"
+
+[dependencies]
+actix = "0.13.0"
+clap = { version = "3.1.6", features = ["derive"] }
+futures = "0.3"
+hkt-rust-allocator-proxy = { version = "0.4", optional = true }
+once_cell = "1.5.2"
+openssl-probe = "0.1.2"
+opentelemetry = { version = "0.17", features = ["rt-tokio"] }
+rayon = "1.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+shell-escape = "0.1.5"
+thiserror = "1"
+tikv-jemallocator = "0.4.0"
+tokio = { version = "1.16.1", features = ["rt-multi-thread"] }
+tracing = "0.1.13"
+
+hktcore = { path = "../hktcore" }
+hkt-chain-configs = { path = "../core/chain-configs" }
+hkt-primitives = { path = "../core/primitives" }
+hkt-performance-metrics = { path = "../utils/hkt-performance-metrics" }
+hkt-state-viewer = { path = "../tools/state-viewer", package = "state-viewer" }
+hkt-store = { path = "../core/store" }
+hkt-o11y = { path = "../core/o11y" }
+
+[build-dependencies]
+anyhow = "1.0.51"
+rustc_version = "0.4"
+
+[features]
+default = ["json_rpc", "rosetta_rpc"]
+
+performance_stats = ["hktcore/performance_stats"]
+memory_stats = ["hktcore/memory_stats", "hkt-rust-allocator-proxy"]
+c_memory_stats = ["hktcore/c_memory_stats"]
+test_features = ["hktcore/test_features"]
+expensive_tests = ["hktcore/expensive_tests"]
+no_cache = ["hktcore/no_cache"]
+delay_detector = ["hktcore/delay_detector"]
+rosetta_rpc = ["hktcore/rosetta_rpc"]
+json_rpc = ["hktcore/json_rpc"]
+protocol_feature_fix_staking_threshold = ["hktcore/protocol_feature_fix_staking_threshold"]
+protocol_feature_flat_state = ["hktcore/protocol_feature_flat_state"]
+
+nightly = [
+  "nightly_protocol",
+  "hktcore/nightly"
+]
+nightly_protocol = ["hktcore/nightly_protocol"]
+
+# Shardnet is the experimental network that we deploy for chunk-only producer testing.
+shardnet = [
+  "hkt-primitives/shardnet",
+  "hktcore/shardnet",
+]
+
+# Compile with option to emit a detailed trace of IO operations and their
+# results that can be replayed on the estimator. To produce the output, compile
+# with this flag and then enable it at runtime with `--record-io-trace=path` option.
+io_trace = ["hkt-store/io_trace", "hkt-o11y/io_trace", "hktcore/io_trace"]
+
+sandbox = ["hktcore/sandbox"]
+
+# Force usage of a specific wasm vm irrespective of protocol version.
+force_wasmer2 = ["hktcore/force_wasmer2"]
+force_wasmer0 = ["hktcore/force_wasmer0"]
+force_wasmtime = ["hktcore/force_wasmtime"]
+
+[package.metadata.workspaces]
+independent = true

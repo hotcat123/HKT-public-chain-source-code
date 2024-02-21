@@ -1,0 +1,59 @@
+[package]
+name = "mock-node"
+version = "0.0.0"
+authors = ["hkt Inc <hello@hktprotocol.com>"]
+publish = false
+# Please update rust-toolchain.toml as well when changing version here:
+rust-version = "1.63.0"
+edition = "2021"
+
+[dependencies]
+actix = "0.13.0"
+actix-rt = "2"
+actix-web = "4.0.1"
+anyhow = "1.0.55"
+clap = { version = "3.1.6", features = ["derive"] }
+flate2 = "1.0.22"
+futures = "0.3"
+rand = "0.7"
+rayon = "1.5"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tar = "0.4.38"
+tempfile = "3"
+tracing = "0.1.13"
+tokio = { version = "1.16.1", features = ["time"]}
+
+hkt-actix-test-utils = { path = "../../test-utils/actix-test-utils" }
+hkt-chain = { path = "../../chain/chain" }
+hkt-chain-configs = { path = "../../core/chain-configs" }
+hkt-client = { path = "../../chain/client" }
+hkt-crypto = { path = "../../core/crypto" }
+hkt-epoch-manager = { path = "../../chain/epoch-manager"}
+hkt-jsonrpc = { path = "../../chain/jsonrpc" }
+hkt-network = { path = "../../chain/network" }
+hkt-network-primitives = { path = "../../chain/network-primitives" }
+hkt-store = { path = "../../core/store" }
+hkt-o11y = { path = "../../core/o11y" }
+hkt-telemetry = { path = "../../chain/telemetry" }
+hkt-performance-metrics = { path = "../../utils/hkt-performance-metrics" }
+hkt-primitives = { path = "../../core/primitives" }
+hktcore = { path = "../../hktcore" }
+
+[dev-dependencies]
+criterion = { version = "0.3.5", default_features = false, features = ["html_reports", "cargo_bench_support"] }
+
+[[bench]]
+name = "sync"
+harness = false
+
+[[bin]]
+name = "mock-node"
+# To make mock node work, we must disable some checks in chain, which is controlled by this feature.
+# We don't make it a default feature, because we don't want it to be enabled unconditionally when you do, for example
+# `cargo test --workspace`
+required-features = ["mock_node"]
+
+[features]
+test_features = ["hktcore/test_features"]
+mock_node = ["hkt-chain/mock_node", "hkt-epoch-manager/mock_node"]
